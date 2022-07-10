@@ -169,11 +169,22 @@ const inquirerTasksList2Uncomplete= async(tasksList=[])=>{
     return uncompleteOptions;
 }
 
+const confirmDelete= async(message)=>{
+    const question={
+        type:'confirm',
+        name:'confirm2Delete',
+        message:message,
+    }
+    const {confirm2Delete}= await inquirer.prompt(question);
+    return confirm2Delete;
+}
+
 module.exports={
     inquirerMenu,
     pause,
     prompt,
     inquirerTasksList2Complete,
+    confirmDelete,
     inquirerTasksList2Uncomplete,
     inquirerTasksList2Delete
 }

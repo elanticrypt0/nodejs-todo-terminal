@@ -1,5 +1,5 @@
 require('colors');
-const { inquirerMenu, pause, prompt,inquirerTasksList2Complete,inquirerTasksList2Uncomplete,inquirerTasksList2Delete } = require('./helpers/inquirer');
+const { inquirerMenu, pause, prompt,inquirerTasksList2Complete,confirmDelete,inquirerTasksList2Uncomplete,inquirerTasksList2Delete } = require('./helpers/inquirer');
 const { saveDB, readDB } = require('./helpers/savedb');
 const TasksList = require('./models/tasksList');
 
@@ -40,7 +40,10 @@ const main= async()=>{
                 break;
             case '7':
                 const task2Delete = await inquirerTasksList2Delete(tasksList.getAllTasks);
-                tasksList.deleteTaskById(task2Delete);
+                const ok=await confirmDelete('¿Realmente desea borrar esta tarea?');
+                if(ok){
+                    tasksList.deleteTaskById(task2Delete);
+                }
                 break;
             default:5
                 break;
